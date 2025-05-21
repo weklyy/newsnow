@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NewsNow - Today's News</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>Today's News</h1>
+    <a href="{{ url_for('refresh_news') }}" id="refreshBtn" class="button-link">Refresh News</a>
+
+    <div class="news-container">
+        {% if articles %}
+            {% for article in articles %}
+            <div class="news-item">
+                <p class="time">#{{ article.serial_no }} - Published: {{ article.published_date }}</p>
+                <h3>{{ article.title }}</h3>
+                <p>{{ article.summary }}</p>
+                <a href="{{ article.link }}" target="_blank">Read full story</a>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="no-news">No news articles are currently available. Try refreshing or check back later.</p>
+        {% endif %}
+    </div>
+
+</body>
+</html>
